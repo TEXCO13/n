@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>창 닫기 방지 및 깜빡이는 화면</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            animation: changeColors 0.04s infinite;
+        }
+
+        @keyframes changeColors {
+            0% { background-color: black; }
+            50% { background-color: white; }
+            100% { background-color: black; }
+        }
+
+        /* 비활성화된 버튼이나 클릭 영역을 숨깁니다 */
+        #closeBtn {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container"></div>
+
+    <script>
+        // 창을 닫을 수 없도록 설정
+        function preventClose(event) {
+            event.preventDefault(); // 기본 동작 막기
+            alert("히히히하"); // 닫기 방지 알림
+        }
+
+        // 창 닫기 방지 이벤트 리스너 추가
+        window.addEventListener('beforeunload', preventClose);
+
+        // 클릭으로 효과 멈추기 방지
+        document.querySelector('.container').addEventListener('click', function() {
+            // 아무 동작도 하지 않도록, 클릭을 막는 로직을 넣어두었습니다
+            console.log("클릭은 효과를 멈추지 않습니다.");
+        });
+    </script>
+
+</body>
+</html>
